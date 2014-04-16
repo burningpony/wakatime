@@ -4,6 +4,7 @@ require 'json'
 require 'net/http/post/multipart'
 require 'open-uri'
 require 'cgi'
+require 'active_support/inflector'
 
 module Wakatime
   class Client
@@ -12,7 +13,7 @@ module Wakatime
     end
 
     def summary(start_at = Time.now - 86400 , end_at = Time.now )
-      request_builder(:summary, {:start => start_at, :end => end_at})
+      request_builder("summary", {:start => start_at, :end => end_at})
     end
 
     def daily(start_at = Time.now - 86400 , end_at = Time.now )
@@ -21,7 +22,7 @@ module Wakatime
 
     def actions(params = {})
 
-      params[:start]     ||= Time.now - 86400 
+      params[:start]     ||= Time.now - 86400
       params[:end]       ||= Time.now
       params[:show]      ||= "file,branch,project,time"
 
@@ -36,11 +37,6 @@ module Wakatime
     def current_user(params = {})
       params[:show]      ||= "email,timeout,last_plugin,timezone"
       request_builder("users/current",params)
-    end
-
-    def program_languages(params = {})
-      params[:show]      ||= "name"
-      request_builder("plugins", params)
     end
 
     private
@@ -58,14 +54,30 @@ module Wakatime
       end
     end
 
-    def request_builder(action, params = {})
+    def request_builder(action, params = {}, raw = false)
       uri  =  Addressable::URI.new
       uri.query_values = cast_params(params)
 
       url = "#{Wakatime::API_URL}/#{action}?#{uri.query}"
-      @session.get( url )
+      response = @session.get( url )
+
+      if raw
+        response
+      else
+        response_factory(action, response)
+      end
     end
 
+    def response_factory(action, response)
+      klass = Object.const_get("Wakatime::Models::#{action.split("/").first.singularize.classify}")
 
+      if response["data"].is_a? Hash
+        klass.new(response["data"])
+      else
+        response["data"].map  do |attributes|
+          klass.new(attributes)
+        end
+      end
+    end
   end
 end

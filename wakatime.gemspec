@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency(%q<hashie>, [">= 0"])
+  spec.add_runtime_dependency(%q<activesupport>, [">= 0"])
   spec.add_runtime_dependency(%q<multipart-post>, [">= 0"])
   spec.add_runtime_dependency(%q<json>, [">= 0"])
   spec.add_runtime_dependency(%q<addressable>, [">= 0"])

@@ -12,9 +12,13 @@ describe Wakatime::Client do
 
   describe '#summary' do
     it "should return json" do
-      Wakatime::Client.any_instance.should_receive(:summary).exactly(1).times
+      stub_request(:get, "#{Wakatime::API_URL}/summary")
+      .with(:query => hash_including(:start, :end))
+      .to_return(:body => File.read('./spec/fixtures/summary.json'), :status => 200)
+
       client = Wakatime::Client.new(@session)
-      client.summary
+      client.summary.grand_total.total_seconds.should eq 49740
+
     end
   end
 end
