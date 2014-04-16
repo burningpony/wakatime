@@ -1,6 +1,6 @@
 # Wakatime Ruby 
   [![Code Climate](https://codeclimate.com/github/burningpony/wakatime.png)](https://codeclimate.com/github/burningpony/wakatime)
-    An Unoffical Wakatime Ruby API Client
+    An Unofficial Wakatime Ruby API Client
 
 ## Installation
 

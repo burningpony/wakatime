@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Wakatime::VERSION
   spec.authors       = ["Russell Osborne"]
   spec.email         = ["russell@burningpony.com"]
-  spec.summary       = %q{A simple ruby gem for accessing Wakatime records}
-  spec.description   = %q{A simple ruby gem for accessing Wakatime records}
+  spec.summary       = %q{An unofficial ruby gem for accessing Wakatime records}
+  spec.description   = %q{An unofficial ruby gem for accessing Wakatime records}
   spec.homepage      = ""
   spec.license       = "MIT"
 
