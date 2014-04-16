@@ -28,15 +28,18 @@ module Wakatime
       request_builder("actions", params)
     end
 
-    def plugins(start_at = Time.now - 86400 , end_at = Time.now )
-      request_builder("plugins", {:start => start_at, :end => end_at})
+    def plugins(params = {})
+      params[:show]      ||= "name,version"
+      request_builder("plugins", params)
     end
 
-    def current_user
-      request_builder("users/current")
+    def current_user(params = {})
+      params[:show]      ||= "email,timeout,last_plugin,timezone"
+      request_builder("users/current",params)
     end
 
-    def program_languages(params = {:show => "name"})
+    def program_languages(params = {})
+      params[:show]      ||= "name"
       request_builder("plugins", params)
     end
 
@@ -62,5 +65,7 @@ module Wakatime
       url = "#{Wakatime::API_URL}/#{action}?#{uri.query}"
       @session.get( url )
     end
+
+
   end
 end
