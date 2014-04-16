@@ -51,7 +51,7 @@ describe Wakatime, :skip => true do
     begin
       @client.summary
     rescue Exception => e
-      e.body.should == '{"type": "error", "status": 503, "message": "We messed up!"}' #TODO establish what happens when wakatime returns a 500 or something else. 
+      e.body.should == '{"type": "error", "status": 503, "message": "We messed up!"}' #TODO establish what happens when wakatime returns a 500 or something else.
       e.status.should == 503
     end
 
