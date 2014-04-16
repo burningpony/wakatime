@@ -1,5 +1,5 @@
 # Wakatime Ruby 
-
+  [![Code Climate](https://codeclimate.com/github/burningpony/wakatime.png)](https://codeclimate.com/github/burningpony/wakatime)
     An Unoffical Wakatime Ruby API Client
 
 ## Installation
@@ -18,7 +18,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    @session = Wakatime::Session.new({
+        api_key: ENV['wakatime_api_key']
+    })
+
+    @client = Wakatime::Client.new(@session)
+
+#### Summary
+    @client.summary
+
+#### Daily Summary
+    @client.daily
+
+#### Daily Summary
+    @client.daily
+
+#### Actions
+    @client.actions
+
+#### Current User
+    @client.current_user
+    
+#### Plugin Data
+    @client.plugins
+    
 
 ## Testing
 
@@ -35,4 +58,4 @@ TODO: Write usage instructions here
 
 ## Credits
 
-  Massive Credit to (Ruby Box)[https://github.com/attachmentsme/ruby-box] as being a template API client. 
+  Massive Credit to [Ruby Box][https://github.com/attachmentsme/ruby-box] as being a template API client. 
