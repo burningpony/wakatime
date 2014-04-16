@@ -1,5 +1,6 @@
 # Wakatime Ruby 
   [![Code Climate](https://codeclimate.com/github/burningpony/wakatime.png)](https://codeclimate.com/github/burningpony/wakatime)
+  [![Build Status](https://travis-ci.org/burningpony/wakatime.svg?branch=master)](https://travis-ci.org/burningpony/wakatime)
     An Unofficial Wakatime Ruby API Client
 
 ## Installation
@@ -26,9 +27,6 @@ Or install it yourself as:
 
 #### Summary
     @client.summary
-
-#### Daily Summary
-    @client.daily
 
 #### Daily Summary
     @client.daily
