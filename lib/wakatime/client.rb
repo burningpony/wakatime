@@ -19,8 +19,13 @@ module Wakatime
       request_builder("summary/daily", {:start => start_at, :end => end_at})
     end
 
-    def actions(start_at = Time.now - 86400 , end_at = Time.now )
-      request_builder("actions", {:start => start_at, :end => end_at})
+    def actions(params = {})
+
+      params[:start]     ||= Time.now - 86400 
+      params[:end]       ||= Time.now
+      params[:show]      ||= "file,branch,project,time"
+
+      request_builder("actions", params)
     end
 
     def plugins(start_at = Time.now - 86400 , end_at = Time.now )
