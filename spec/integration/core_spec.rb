@@ -23,45 +23,45 @@ describe Wakatime, skip: true do
 
     @bad_client = Wakatime::Client.new(session)
 
-    lambda { @bad_client.summary }.should raise_error(Wakatime::AuthError)
+    expect { @bad_client.summary }.to raise_error(Wakatime::AuthError)
   end
   describe Wakatime::Client do
 
     it 'will return json scoped to specified times' do
       summary = @client.summary
-      summary.should be_a Wakatime::Models::Summary
-      summary.should respond_to :grand_total
-      summary.should respond_to :projects
+      expect(summary).to be_a Wakatime::Models::Summary
+      expect(summary).to respond_to :grand_total
+      expect(summary).to respond_to :projects
     end
 
     it 'will return json scoped to specified times' do
       actions = @client.actions
-      actions.should be_a Array
-      actions.first.should be_a Wakatime::Models::Action
-      actions.first.should respond_to :file
-      actions.first.should respond_to :time
+      expect(actions).to be_a Array
+      expect(actions.first).to be_a Wakatime::Models::Action
+      expect(actions.first).to respond_to :file
+      expect(actions.first).to respond_to :time
     end
 
     it 'will return current user json' do
       current_user = @client.current_user
-      current_user.should be_a Wakatime::Models::User
-      current_user.should respond_to :email
-      current_user.should respond_to :timezone
+      expect(current_user).to be_a Wakatime::Models::User
+      expect(current_user).to respond_to :email
+      expect(current_user).to respond_to :timezone
     end
 
     it 'will return plugin usage json scoped to specified times' do
       plugins = @client.plugins
-      plugins.should be_a Array
-      plugins.first.should be_a Wakatime::Models::Plugin
-      plugins.first.should respond_to :name
+      expect(plugins).to be_a Array
+      expect(plugins.first).to be_a Wakatime::Models::Plugin
+      expect(plugins.first).to respond_to :name
     end
 
     it 'will return daily json scoped to specified times' do
       daily = @client.daily
-      daily.should be_a Array
-      daily.first.should be_a Wakatime::Models::Summary
-      daily.first.should respond_to :grand_total
-      daily.first.should respond_to :projects
+      expect(daily).to be_a Array
+      expect(daily.first).to be_a Wakatime::Models::Summary
+      expect(daily.first).to respond_to :grand_total
+      expect(daily.first).to respond_to :projects
     end
   end
 end

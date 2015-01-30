@@ -25,8 +25,8 @@ describe Wakatime::Session do
     begin
       @client.summary
     rescue StandardError => e
-      e.body.should eq '{\n  \"errors\": [\n    \"UNAUTHORIZED\"\n  ]\n}'
-      e.status.should eq 401
+      expect(e.body).to eq '{\n  \"errors\": [\n    \"UNAUTHORIZED\"\n  ]\n}'
+      expect(e.status).to eq 401
     end
   end
 
@@ -40,8 +40,8 @@ describe Wakatime::Session do
     begin
       @client.summary
     rescue StandardError => e
-      e.body.should eq '{"type": "error", "status": 503, "message": "We messed up!"}' # TODO establish what happens when wakatime returns a 500 or something else.
-      e.status.should eq 503
+      expect(e.body).to eq '{"type": "error", "status": 503, "message": "We messed up!"}' # TODO establish what happens when wakatime returns a 500 or something else.
+      expect(e.status).to eq 503
     end
 
   end

@@ -17,7 +17,7 @@ describe Wakatime::Client do
       .to_return(body: File.read('./spec/fixtures/summary.json'), status: 200)
 
       client = Wakatime::Client.new(@session)
-      client.summary.grand_total.total_seconds.should eq 49_740
+      expect(client.summary.grand_total.total_seconds).to eq 49_740
 
     end
   end
@@ -29,7 +29,7 @@ describe Wakatime::Client do
       .to_return(body: File.read('./spec/fixtures/actions.json'), status: 200)
 
       client = Wakatime::Client.new(@session)
-      client.actions.last.time.should eq 1422631940.699831
+      expect(client.actions.last.time).to eq 1422631940.699831
 
     end
   end
