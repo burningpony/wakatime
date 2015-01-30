@@ -1,4 +1,4 @@
-module Wakatime 
+module Wakatime
   class WakatimeError < StandardError
     attr_accessor :body, :status
 

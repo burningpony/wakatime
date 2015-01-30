@@ -1,4 +1,4 @@
-require "wakatime/version"
+require 'wakatime/version'
 require 'wakatime/session'
 require 'wakatime/client'
 require 'wakatime/exceptions'

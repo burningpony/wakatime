@@ -1,4 +1,4 @@
-#encoding: UTF-8
+# encoding: UTF-8
 
 require 'spec_helper'
 require 'support/account'
@@ -11,13 +11,25 @@ describe Wakatime::Client do
   end
 
   describe '#summary' do
-    it "should return json" do
+    it 'should return json' do
       stub_request(:get, "#{Wakatime::API_URL}/summary")
-      .with(:query => hash_including(:start, :end))
-      .to_return(:body => File.read('./spec/fixtures/summary.json'), :status => 200)
+      .with(query: hash_including(:start, :end))
+      .to_return(body: File.read('./spec/fixtures/summary.json'), status: 200)
 
       client = Wakatime::Client.new(@session)
-      client.summary.grand_total.total_seconds.should eq 49740
+      client.summary.grand_total.total_seconds.should eq 49_740
+
+    end
+  end
+
+  describe '#actions' do
+    it 'should return json' do
+      stub_request(:get, "#{Wakatime::API_URL}/actions")
+      .with(query: hash_including(:start, :end))
+      .to_return(body: File.read('./spec/fixtures/actions.json'), status: 200)
+
+      client = Wakatime::Client.new(@session)
+      client.actions.grand_total.total_seconds.should eq 49_740
 
     end
   end
