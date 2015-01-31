@@ -5,7 +5,7 @@ require 'net/http/post/multipart'
 require 'open-uri'
 require 'cgi'
 require 'active_support/inflector'
-require 'addressable/uri'
+require 'addressable/template'
 require 'base64'
 module Wakatime
   class Client
@@ -42,7 +42,7 @@ module Wakatime
     private
 
     def cast_params(params)
-      casted_params = params.reduce({}) { |h, (k, v)| h[k] = cast_param(v); h }
+      params.reduce({}) { |h, (k, v)| h[k] = cast_param(v); h }
     end
 
     def cast_param(param)
@@ -55,11 +55,12 @@ module Wakatime
     end
 
     def request_builder(action, params = {}, raw = false)
-      uri  =  Addressable::URI.new
-      uri.query_values = cast_params(params)
+      uri  =  Addressable::Template.new("#{Wakatime::API_URL}/#{action}{?query*}")
+      uri  = uri.expand(
+        'query' => cast_params(params)
+      )
 
-      url = "#{Wakatime::API_URL}/#{action}?#{uri.query}"
-      response = @session.get(url)
+      response = @session.get(uri.to_s)
 
       if raw
         response

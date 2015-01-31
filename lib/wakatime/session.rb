@@ -15,7 +15,7 @@ module Wakatime
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
 
-      http.set_debug_output($stdout)
+      # http.set_debug_output($stdout)
       request.add_field('Content-Type', 'application/json')
 
       if @api_key

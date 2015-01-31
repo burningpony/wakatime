@@ -29,7 +29,7 @@ describe Wakatime::Client do
       .to_return(body: File.read('./spec/fixtures/actions.json'), status: 200)
 
       client = Wakatime::Client.new(@session)
-      expect(client.actions.last.time).to eq 1422631940.699831
+      expect(client.actions.last.time).to eq 1_422_631_940.699831
 
     end
   end
