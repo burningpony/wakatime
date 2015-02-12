@@ -21,6 +21,10 @@ module Wakatime
       request_builder('summary/daily', start: start_at, end: end_at)
     end
 
+    def durations(date = Date.today)
+      request_builder('durations', date: date)
+    end
+
     def heartbeats(params = {})
       params[:start]     ||= Time.now - 86_400
       params[:end]       ||= Time.now

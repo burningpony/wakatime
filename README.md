@@ -31,6 +31,9 @@ Or install it yourself as:
 #### Daily Summary
     @client.daily
 
+#### Durations
+    @client.durations
+
 #### Heartbearts
     @client.hearbeats
 
