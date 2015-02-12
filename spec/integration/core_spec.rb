@@ -35,11 +35,11 @@ describe Wakatime, skip: true do
     end
 
     it 'will return json scoped to specified times' do
-      actions = @client.actions
-      expect(actions).to be_a Array
-      expect(actions.first).to be_a Wakatime::Models::Action
-      expect(actions.first).to respond_to :file
-      expect(actions.first).to respond_to :time
+      heartbeats = @client.heartbeats
+      expect(heartbeats).to be_a Array
+      expect(heartbeats.first).to be_a Wakatime::Models::Action
+      expect(heartbeats.first).to respond_to :file
+      expect(heartbeats.first).to respond_to :time
     end
 
     it 'will return current user json' do

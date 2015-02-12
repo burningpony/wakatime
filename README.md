@@ -31,8 +31,8 @@ Or install it yourself as:
 #### Daily Summary
     @client.daily
 
-#### Actions
-    @client.actions
+#### Heartbearts
+    @client.hearbeats
 
 #### Current User
     @client.current_user

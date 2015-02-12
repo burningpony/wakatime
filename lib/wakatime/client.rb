@@ -21,12 +21,12 @@ module Wakatime
       request_builder('summary/daily', start: start_at, end: end_at)
     end
 
-    def actions(params = {})
+    def heartbeats(params = {})
       params[:start]     ||= Time.now - 86_400
       params[:end]       ||= Time.now
       params[:show]      ||= 'file,branch,project,time'
 
-      request_builder('actions', params)
+      request_builder('heartbeats', params)
     end
 
     def plugins(params = {})

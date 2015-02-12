@@ -22,14 +22,14 @@ describe Wakatime::Client do
     end
   end
 
-  describe '#actions' do
+  describe '#heartbeats' do
     it 'should return json' do
-      stub_request(:get, "#{Wakatime::API_URL}/actions")
+      stub_request(:get, "#{Wakatime::API_URL}/heartbeats")
       .with(query: hash_including(:start, :end))
-      .to_return(body: File.read('./spec/fixtures/actions.json'), status: 200)
+      .to_return(body: File.read('./spec/fixtures/heartbeats.json'), status: 200)
 
       client = Wakatime::Client.new(@session)
-      expect(client.actions.last.time).to eq 1_422_631_940.699831
+      expect(client.heartbeats.last.time).to eq 1_422_631_940.699831
 
     end
   end
