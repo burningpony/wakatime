@@ -13,12 +13,8 @@ module Wakatime
       @session = session
     end
 
-    def summary(start_at = Time.now - 86_400, end_at = Time.now)
-      request_builder('summary', start: start_at, end: end_at)
-    end
-
-    def daily(start_at = Time.now - 86_400, end_at = Time.now)
-      request_builder('summary/daily', start: start_at, end: end_at)
+    def summaries(start_at = Time.now - 86_400, end_at = Time.now)
+      request_builder('summaries', start: start_at, end: end_at)
     end
 
     def durations(date = Date.today)
@@ -26,8 +22,7 @@ module Wakatime
     end
 
     def heartbeats(params = {})
-      params[:start]     ||= Time.now - 86_400
-      params[:end]       ||= Time.now
+      params[:date]      ||= Date.today
       params[:show]      ||= 'file,branch,project,time'
 
       request_builder('heartbeats', params)

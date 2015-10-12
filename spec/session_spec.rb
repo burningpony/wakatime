@@ -17,13 +17,13 @@ describe Wakatime::Session do
   end
 
   it 'raises a RequestError if a badly formed request detected by the server' do
-    stub_request(:get, /.*\/summary.*/).to_return(status: 401, body: '{\n  \"errors\": [\n    \"UNAUTHORIZED\"\n  ]\n}', headers: {})
-    expect { @client.summary }.to raise_error(Wakatime::AuthError)
+    stub_request(:get, /.*\/summaries.*/).to_return(status: 401, body: '{\n  \"errors\": [\n    \"UNAUTHORIZED\"\n  ]\n}', headers: {})
+    expect { @client.summaries }.to raise_error(Wakatime::AuthError)
 
     # make sure status and body is
     # set on error object.
     begin
-      @client.summary
+      @client.summaries
     rescue StandardError => e
       expect(e.body).to eq '{\n  \"errors\": [\n    \"UNAUTHORIZED\"\n  ]\n}'
       expect(e.status).to eq 401
@@ -31,14 +31,14 @@ describe Wakatime::Session do
   end
 
   it 'raises a ServerError if the server raises a 500 error' do
-    stub_request(:get, /.*\/summary.*/)
+    stub_request(:get, /.*\/summaries.*/)
     .to_return(status: 503, body: '{"type": "error", "status": 503, "message": "We messed up!"}', headers: {})
-    expect { @client.summary }.to raise_error(Wakatime::ServerError)
+    expect { @client.summaries }.to raise_error(Wakatime::ServerError)
 
     # make sure status and body is
     # set on error object.
     begin
-      @client.summary
+      @client.summaries
     rescue StandardError => e
       expect(e.body).to eq '{"type": "error", "status": 503, "message": "We messed up!"}' # TODO establish what happens when wakatime returns a 500 or something else.
       expect(e.status).to eq 503

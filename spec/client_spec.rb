@@ -10,14 +10,14 @@ describe Wakatime::Client do
     @session = Wakatime::Session.new
   end
 
-  describe '#summary' do
+  describe '#summaries' do
     it 'should return json' do
-      stub_request(:get, "#{Wakatime::API_URL}/summary")
+      stub_request(:get, "#{Wakatime::API_URL}/summaries")
       .with(query: hash_including(:start, :end))
-      .to_return(body: File.read('./spec/fixtures/summary.json'), status: 200)
+      .to_return(body: File.read('./spec/fixtures/summaries.json'), status: 200)
 
       client = Wakatime::Client.new(@session)
-      expect(client.summary.grand_total.total_seconds).to eq 49_740
+      expect(client.summaries.grand_total.total_seconds).to eq 49_740
 
     end
   end
@@ -25,7 +25,7 @@ describe Wakatime::Client do
   describe '#heartbeats' do
     it 'should return json' do
       stub_request(:get, "#{Wakatime::API_URL}/heartbeats")
-      .with(query: hash_including(:start, :end))
+      .with(query: hash_including(:date))
       .to_return(body: File.read('./spec/fixtures/heartbeats.json'), status: 200)
 
       client = Wakatime::Client.new(@session)

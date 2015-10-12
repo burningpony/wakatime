@@ -29,7 +29,7 @@ describe Wakatime, skip: true do
 
     it 'will return json scoped to specified times' do
       summary = @client.summary
-      expect(summary).to be_a Wakatime::Models::Summary
+      expect(summary).to be_a Wakatime::Models::Summaries
       expect(summary).to respond_to :grand_total
       expect(summary).to respond_to :projects
     end
