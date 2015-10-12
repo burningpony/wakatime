@@ -9,16 +9,15 @@ describe Wakatime, skip: true do
   before do
     WebMock.allow_net_connect!
     @session = Wakatime::Session.new(
-                                       api_key: ACCOUNT['api_key']
+      api_key: ACCOUNT['api_key']
     )
 
     @client = Wakatime::Client.new(@session)
-
   end
 
   it 'raises an AuthError if not client auth fails' do
     session = Wakatime::Session.new(
-                                      api_key: 'bad-key'
+      api_key: 'bad-key'
     )
 
     @bad_client = Wakatime::Client.new(session)
@@ -26,7 +25,6 @@ describe Wakatime, skip: true do
     expect { @bad_client.summary }.to raise_error(Wakatime::AuthError)
   end
   describe Wakatime::Client do
-
     it 'will return json scoped to specified times' do
       summary = @client.summary
       expect(summary).to be_a Wakatime::Models::Summaries

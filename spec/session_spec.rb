@@ -7,13 +7,11 @@ require 'webmock/rspec'
 
 describe Wakatime::Session do
   before do
-
     @session = Wakatime::Session.new(
-                                       api_key: 'Lame Key'
+      api_key: 'Lame Key'
     )
 
     @client = Wakatime::Client.new(@session)
-
   end
 
   it 'raises a RequestError if a badly formed request detected by the server' do
@@ -32,7 +30,7 @@ describe Wakatime::Session do
 
   it 'raises a ServerError if the server raises a 500 error' do
     stub_request(:get, /.*\/summaries.*/)
-    .to_return(status: 503, body: '{"type": "error", "status": 503, "message": "We messed up!"}', headers: {})
+      .to_return(status: 503, body: '{"type": "error", "status": 503, "message": "We messed up!"}', headers: {})
     expect { @client.summaries }.to raise_error(Wakatime::ServerError)
 
     # make sure status and body is
@@ -40,9 +38,8 @@ describe Wakatime::Session do
     begin
       @client.summaries
     rescue StandardError => e
-      expect(e.body).to eq '{"type": "error", "status": 503, "message": "We messed up!"}' # TODO establish what happens when wakatime returns a 500 or something else.
+      expect(e.body).to eq '{"type": "error", "status": 503, "message": "We messed up!"}' # TODO: establish what happens when wakatime returns a 500 or something else.
       expect(e.status).to eq 503
     end
-
   end
 end

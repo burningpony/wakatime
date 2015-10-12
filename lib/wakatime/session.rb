@@ -24,9 +24,7 @@ module Wakatime
 
       response = http.request(request)
 
-      if response.is_a? Net::HTTPNotFound
-        fail Wakatime::ObjectNotFound
-      end
+      fail Wakatime::ObjectNotFound if response.is_a? Net::HTTPNotFound
 
       sleep(@backoff) # try not to excessively hammer API.
 

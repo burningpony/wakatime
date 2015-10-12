@@ -22,19 +22,19 @@ module Wakatime
     end
 
     def heartbeats(params = {})
-      params[:date]      ||= Date.today
-      params[:show]      ||= 'file,branch,project,time'
+      params[:date] ||= Date.today
+      params[:show] ||= 'file,branch,project,time'
 
       request_builder('heartbeats', params)
     end
 
     def plugins(params = {})
-      params[:show]      ||= 'name,version'
+      params[:show] ||= 'name,version'
       request_builder('plugins', params)
     end
 
     def current_user(params = {})
-      params[:show]      ||= 'email,timeout,last_plugin,timezone'
+      params[:show] ||= 'email,timeout,last_plugin,timezone'
       request_builder('users/current', params)
     end
 
@@ -54,7 +54,7 @@ module Wakatime
     end
 
     def request_builder(action, params = {}, raw = false)
-      uri  =  Addressable::Template.new("#{Wakatime::API_URL}/#{action}{?query*}")
+      uri  = Addressable::Template.new("#{Wakatime::API_URL}/#{action}{?query*}")
       uri  = uri.expand(
         'query' => cast_params(params)
       )
@@ -74,7 +74,7 @@ module Wakatime
       if response['data'].is_a? Hash
         klass.new(response['data'])
       else
-        response['data'].map  do |attributes|
+        response['data'].map do |attributes|
           klass.new(attributes)
         end
       end
