@@ -12,7 +12,7 @@ describe Wakatime::Client do
 
   describe '#summaries' do
     it 'should return json' do
-      stub_request(:get, "#{Wakatime::API_URL}/summaries")
+      stub_request(:get, "#{Wakatime::API_URL}/users/current/summaries")
         .with(query: hash_including(:start, :end))
         .to_return(body: File.read('./spec/fixtures/summaries.json'), status: 200)
 
@@ -23,7 +23,7 @@ describe Wakatime::Client do
 
   describe '#heartbeats' do
     it 'should return json' do
-      stub_request(:get, "#{Wakatime::API_URL}/heartbeats")
+      stub_request(:get, "#{Wakatime::API_URL}/users/current/heartbeats")
         .with(query: hash_including(:date))
         .to_return(body: File.read('./spec/fixtures/heartbeats.json'), status: 200)
 
