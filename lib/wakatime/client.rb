@@ -4,6 +4,7 @@ require 'json'
 require 'net/http/post/multipart'
 require 'open-uri'
 require 'cgi'
+require 'active_support'
 require 'active_support/inflector'
 require 'addressable/template'
 require 'base64'
@@ -14,23 +15,23 @@ module Wakatime
     end
 
     def summaries(start_at = Time.now - 86_400, end_at = Time.now)
-      request_builder('summaries', start: start_at, end: end_at)
+      request_builder('users/current/summaries', start: start_at, end: end_at)
     end
 
     def durations(date = Date.today)
-      request_builder('durations', date: date)
+      request_builder('users/current/durations', date: date)
     end
 
     def heartbeats(params = {})
       params[:date] ||= Date.today
       params[:show] ||= 'file,branch,project,time'
 
-      request_builder('heartbeats', params)
+      request_builder('users/current/heartbeats', params)
     end
 
     def plugins(params = {})
       params[:show] ||= 'name,version'
-      request_builder('plugins', params)
+      request_builder('users/current/plugins', params)
     end
 
     def current_user(params = {})
