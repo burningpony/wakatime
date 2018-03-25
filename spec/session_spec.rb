@@ -15,7 +15,7 @@ describe Wakatime::Session do
   end
 
   it 'raises a RequestError if a badly formed request detected by the server' do
-    stub_request(:get, /.*\/summaries.*/).to_return(status: 401, body: '{\n  \"errors\": [\n    \"UNAUTHORIZED\"\n  ]\n}', headers: {})
+    stub_request(:get, /.*\/summaries.*/).to_return(status: 401, body: '{ "errors": ["UNAUTHORIZED"]}', headers: {})
     expect { @client.summaries }.to raise_error(Wakatime::AuthError)
 
     # make sure status and body is
@@ -23,8 +23,10 @@ describe Wakatime::Session do
     begin
       @client.summaries
     rescue StandardError => e
-      expect(e.body).to eq '{\n  \"errors\": [\n    \"UNAUTHORIZED\"\n  ]\n}'
+      expect(e.body).to eq "{ \"errors\": [\"UNAUTHORIZED\"]}"
+
       expect(e.status).to eq 401
+      expect(e.message).to eq 'UNAUTHORIZED'
     end
   end
 

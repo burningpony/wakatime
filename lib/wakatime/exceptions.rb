@@ -11,6 +11,10 @@ module Wakatime
     def [](key)
       @error_json[key]
     end
+
+    def message
+      [@error_json["errors"].join(" ")].join("\n")
+    end
   end
 
   class AuthError < WakatimeError; end
