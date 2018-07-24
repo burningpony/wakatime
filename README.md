@@ -32,7 +32,7 @@ Or install it yourself as:
     @client.durations
 
 #### Heartbearts
-    @client.hearbeats
+    @client.heartbeats
 
 #### Current User
     @client.current_user
